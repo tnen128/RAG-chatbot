@@ -2,6 +2,7 @@ from fastapi import FastAPI, File, UploadFile
 from docs.uploader import save_uploaded_files
 from docs.vectorizer import save_doc_to_vector_store
 from fastapi.responses import JSONResponse, StreamingResponse
+from streamer import stream_response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
@@ -40,6 +41,7 @@ class ChatQuery(BaseModel):
 @app.post("/chat")
 async def chat(chat_query: ChatQuery):
     return StreamingResponse(stream_response(chat_query.query), media_type="text/event-stream")
+
 
 
 
