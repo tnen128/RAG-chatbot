@@ -1,10 +1,7 @@
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from docs.retriever import context_retriever
-from config.prompts import (
-    chat_prompt_template,
-    ext_prompt_template,
-)
+from config.prompts import chat_prompt_template
 from config.llms import llama3
 from typing import AsyncIterable
 
@@ -27,16 +24,3 @@ async def stream_response(query: str) -> AsyncIterable[str]:
         encoded_chunk = chunk.replace('\n', '\\n')
         yield f"data: {encoded_chunk}\n\n"
 
-
-# generate non-streamed response for extension
-async def extension_response(context: str, query: str) -> str:
-
-    # from rag chain
-    rag_chain = (
-        {"context": lambda x: context, "question": RunnablePassthrough()}
-        | ext_prompt_template
-        | llama3
-        | StrOutputParser()
-    )
-
-    return rag_chain.invoke(query).strip('"')
