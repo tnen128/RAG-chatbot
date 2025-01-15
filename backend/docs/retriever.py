@@ -7,6 +7,10 @@ from langchain.schema import Document
 import os
 
 
+
+
+
+
 def context_retriever(query):
     persist_directory = os.path.join(
         os.path.dirname(__file__), os.pardir, 'db')

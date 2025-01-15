@@ -8,6 +8,7 @@ def display_pdf_output(pdf_path):
     Args:
         pdf_path (str): The path to the PDF file.
     """
+    
     try:
         # Initialize the PyPDFLoader with the PDF file path
         loader = PyPDFLoader(pdf_path)

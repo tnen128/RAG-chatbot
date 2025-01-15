@@ -9,3 +9,4 @@ fastapi==0.115.6
 aiofiles==24.1.0
 requests==2.32.3
 sseclient==0.0.27
+xformers==0.0.20
